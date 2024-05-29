@@ -42,9 +42,10 @@ async def message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         role="user",
         content=update.message.text,
     )
-    stream = client.beta.threads.create_and_run(
+    stream = client.beta.threads.runs.create(
         assistant_id=config.get("ASSISTANT_ID"),
-        thread={"messages": [{"role": "user", "content": update.message.text}]}, stream=True
+        thread_id=thread_id,
+        stream=True
     )
     response = "💀"
     try:

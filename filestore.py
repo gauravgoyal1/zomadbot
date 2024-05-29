@@ -10,6 +10,7 @@ class FileStore:
                 json.dump({}, file)
 
     def add(self, key, value):
+        key = str(key)
         with open(self.filename, 'r+') as file:
             data = json.load(file)
             data[key] = value
@@ -17,11 +18,13 @@ class FileStore:
             json.dump(data, file, indent=4)
     
     def fetch(self, key):
+        key = str(key)
         with open(self.filename, 'r') as file:
             data = json.load(file)
             return data.get(key, None)
 
     def remove(self, key):
+        key = str(key)
         with open(self.filename, 'r+') as file:
             data = json.load(file)
             if key in data:
